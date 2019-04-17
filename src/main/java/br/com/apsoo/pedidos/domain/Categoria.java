@@ -2,6 +2,8 @@ package br.com.apsoo.pedidos.domain;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -20,6 +22,10 @@ public class Categoria implements Serializable {
     private Integer id;
     @Column(name =  "CA_NOME")
     private String nome;
+
+
+    @ManyToMany(mappedBy = "categorias")
+    private List<Produto> produtos = new ArrayList<>();
 
     public Categoria(){}
 
@@ -43,6 +49,14 @@ public class Categoria implements Serializable {
     public String getNome() {
 
         return nome;
+    }
+
+    public List<Produto> getProdutos() {
+        return produtos;
+    }
+
+    public void setProdutos(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
     @Override

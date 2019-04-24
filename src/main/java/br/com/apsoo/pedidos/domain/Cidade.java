@@ -1,12 +1,21 @@
 package br.com.apsoo.pedidos.domain;
 
-import com.sun.javafx.beans.IDProperty;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 @Entity //tornar a classe elegivel para entidade no banco de dados.
@@ -39,7 +48,7 @@ public class Cidade implements Serializable {
         this.estado = estado;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -68,7 +77,7 @@ public class Cidade implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cidade cidade = (Cidade) o;
-        return id == cidade.id;
+        return id.equals(cidade.id);
     }
 
     @Override

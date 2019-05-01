@@ -1,5 +1,7 @@
 package br.com.apsoo.pedidos.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -29,12 +31,13 @@ public class Cidade implements Serializable {
     @Id
     @Column(name = "CI_ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_cidade")
-    private Long id;
+    private Integer id;
 
     @Column(name = "CI_NOME")
     private String nome;
 
-    @ManyToOne
+    @JsonManagedReference //quando api tentar carregar o outro ele vai falar: nao é rpa vc fazer isso
+    @ManyToOne //traz o cara
     @JoinColumn(name = "ES_ID")
     private Estado estado;
 
@@ -42,13 +45,13 @@ public class Cidade implements Serializable {
     }
 
 
-    public Cidade(Long id, String nome, Estado estado) {
+    public Cidade(Integer id, String nome, Estado estado) {
         this.id = id;
         this.nome = nome;
         this.estado = estado;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -60,7 +63,7 @@ public class Cidade implements Serializable {
         return estado;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

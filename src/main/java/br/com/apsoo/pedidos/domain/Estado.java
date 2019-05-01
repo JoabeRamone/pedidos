@@ -1,5 +1,7 @@
 package br.com.apsoo.pedidos.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -29,24 +31,25 @@ public class Estado implements Serializable {
     @Id
     @Column(name = "ES_ID")
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "seq_estado")
-    private Long id;
+    private Integer id;
 
 
     @Column(name = "ES_NOME")
     private String nome;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "estado")//1..*
     private List<Cidade> cidades = new ArrayList<>();
 
     public Estado() {
     }
 
-    public Estado(Long id, String nome) {
+    public Estado(Integer id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -58,7 +61,7 @@ public class Estado implements Serializable {
         return cidades;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
